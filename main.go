@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/go-ble/ble"
 	"github.com/ui-kreinhard/cleargrass-le/clearglass-le"
 	"os"
 	"os/signal"
 )
 
-func logHandleEnvironmentData(temperature clearglass_le.Temperature, humidity clearglass_le.Humidity, battery clearglass_le.Battery) {
-	fmt.Println("temp", temperature, "humidity", humidity, "battery", battery)
+func logHandleEnvironmentData(temperature clearglass_le.Temperature, humidity clearglass_le.Humidity, battery clearglass_le.Battery, addr ble.Addr) {
+	fmt.Println("addr", addr, "temp", temperature, "humidity", humidity, "battery", battery)
 }
 
 

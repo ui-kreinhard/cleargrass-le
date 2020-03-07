@@ -29,7 +29,7 @@ func (h *Humidity) String() string {
 }
 
 type Battery uint16
-type OnTemperateChangeHandle func(temperature Temperature, humidity Humidity, battery Battery)
+type OnTemperateChangeHandle func(temperature Temperature, humidity Humidity, battery Battery, addr ble.Addr)
 
 type ClearGrass struct {
 	handle OnTemperateChangeHandle
@@ -45,7 +45,7 @@ func (c *ClearGrass) onPeripheralDiscovered(a ble.Advertisement) {
 			temp := binary.LittleEndian.Uint16(serviceData[10:12])
 			humidity := binary.LittleEndian.Uint16(serviceData[12:14])
 			battery := sd.Data[16]
-			c.handle(Temperature(temp), Humidity(humidity), Battery(battery))
+			c.handle(Temperature(temp), Humidity(humidity), Battery(battery), a.Addr())
 		}
 	}
 }
